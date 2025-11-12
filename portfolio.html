@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honey Kundla | Data & Business Intelligence Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Background */
+    .bg-animation {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0d2e 50%, #0a0a0a 100%);
+    }
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      width: 200%; height: 200%;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(229,9,20,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0,113,235,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(138,43,226,0.08) 0%, transparent 50%);
+      animation: bgMove 20s ease-in-out infinite;
+    }
+    @keyframes bgMove {
+      0%,100% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(-50px,50px) rotate(5deg); }
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(229,9,20,0.2);
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 1.8rem; font-weight: bold;
+      background: linear-gradient(135deg, #e50914, #0071eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #fff; text-decoration: none; position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: #e50914; transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 0 5%;
+    }
+    .profile-photo img {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 4px solid #e50914; box-shadow: 0 0 40px rgba(229,9,20,0.5);
+      object-fit: cover; margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      background: linear-gradient(135deg, #fff, #e50914, #0071eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle { color: #aaa; font-size: 1.4rem; margin: 1rem 0 2rem; }
+    .role-tags { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .role-tag {
+      padding: 0.6rem 1.4rem; border: 1px solid #e50914;
+      border-radius: 30px; background: rgba(229,9,20,0.1);
+      transition: all 0.3s;
+    }
+    .role-tag:hover { transform: translateY(-4px); box-shadow: 0 0 15px rgba(229,9,20,0.3); }
+    .cta-buttons { margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; }
+    .btn {
+      padding: 1rem 2.4rem; border-radius: 50px;
+      text-decoration: none; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-primary { background: linear-gradient(135deg, #e50914, #b20710); color: #fff; }
+    .btn-secondary { border: 2px solid #0071eb; color: #fff; }
+
+    section { padding: 5rem 5%; max-width: 1400px; margin: auto; }
+    .section-title {
+      text-align: center; font-size: 3rem; margin-bottom: 3rem;
+      background: linear-gradient(135deg, #fff, #e50914);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* About Me */
+    .about-container {
+      background: rgba(255,255,255,0.03);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 1000px;
+      margin: auto;
+      box-shadow: 0 0 30px rgba(229,9,20,0.2);
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #ccc;
+      text-align: center;
+    }
+    .about-container h3 {
+      color: #e50914;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    .strengths, .weaknesses {
+      margin-top: 2rem;
+      text-align: left;
+      padding: 1.5rem;
+      background: rgba(0,113,235,0.05);
+      border-left: 3px solid #0071eb;
+      border-radius: 10px;
+    }
+    .strengths h4, .weaknesses h4 { color: #e50914; margin-bottom: 0.8rem; }
+
+    /* Projects, Skills, Certificates, Footer - (unchanged) */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 2rem; }
+    .project-card {
+      background: linear-gradient(135deg, rgba(229,9,20,0.1), rgba(0,113,235,0.1));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 2rem;
+      transition: all 0.4s;
+    }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(229,9,20,0.3); }
+    .project-card h3 { color: #e50914; font-size: 1.5rem; }
+    .project-card .duration { color: #0071eb; margin: 0.5rem 0; font-size: 0.9rem; }
+    .project-card p { color: #ccc; line-height: 1.6; }
+    .project-link {
+      display: inline-block; margin-top: 1rem;
+      background: linear-gradient(135deg, #0071eb, #0052cc);
+      color: #fff; padding: 0.7rem 1.5rem; border-radius: 25px;
+      text-decoration: none; font-weight: 600;
+    }
+    .project-link:hover { background: linear-gradient(135deg, #e50914, #b20710); }
+
+    .skills-container {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+    }
+    .skill-category {
+      background: rgba(255,255,255,0.03); border-radius: 15px; padding: 2rem;
+      transition: all 0.3s;
+    }
+    .skill-category:hover { border: 1px solid #e50914; transform: translateY(-5px); }
+    .skill-category h3 { color: #e50914; margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .skill-tag {
+      background: rgba(0,113,235,0.1); border: 1px solid rgba(0,113,235,0.3);
+      border-radius: 20px; padding: 0.5rem 1rem; font-size: 0.9rem;
+    }
+
+    .featured-certs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem; margin-bottom: 3rem;
+    }
+    .featured-cert {
+      background: linear-gradient(135deg, rgba(229,9,20,0.1), rgba(0,113,235,0.1));
+      border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s;
+    }
+    .featured-cert img { width: 100%; border-radius: 15px; margin-bottom: 1rem; }
+    .featured-cert:hover { transform: translateY(-10px); }
+    .featured-cert h4 { color: #e50914; }
+    .cert-title { color: #0071eb; font-weight: 600; }
+
+    footer { text-align: center; padding: 2rem; background: rgba(10,10,10,0.9); }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <nav>
+    <div class="logo">HK</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="profile-photo"><img src="profile.png" alt="Honey Kundla"></div>
+      <h1>Honey Kundla</h1>
+      <p class="subtitle">Transforming Data into Strategic Business Decisions</p>
+      <div class="role-tags">
+        <span class="role-tag">🎯 Program Manager</span>
+        <span class="role-tag">📊 Product Manager</span>
+        <span class="role-tag">🚀 Project Manager</span>
+        <span class="role-tag">📈 Data Analyst</span>
+        <span class="role-tag">💼 Business Analyst</span>
+        <span class="role-tag">🤖 AI & Insights</span>
+      </div>
+      <div class="cta-buttons">
+        <a href="#about" class="btn btn-primary">Know Me</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔥 NEW ABOUT SECTION -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-container">
+      <p>
+        Hi! I’m <strong>Honey Kundla</strong> — a Data Analytics enthusiast and aspiring Program Manager who loves transforming information into impact. 
+        I’m not a big fan of hardcore coding, but I excel at using <strong>AI-powered tools</strong> to make data smarter, insights sharper, and workflows smoother.
+      </p>
+      <p style="margin-top:1rem;">
+        My approach blends <strong>analytical thinking</strong> with <strong>creativity</strong> — I enjoy problem-solving, building meaningful dashboards, and making technology accessible for everyone. 
+        I believe efficiency is an art, and AI is the paintbrush.
+      </p>
+
+      <div class="strengths">
+        <h4>🌟 Strengths</h4>
+        <ul>
+          <li>Excellent communication & storytelling with data</li>
+          <li>Strong leadership and decision-making under pressure</li>
+          <li>Quick learner — adaptive to tools like Power BI, Fabric, Copilot, and ChatGPT</li>
+          <li>Analytical mindset with a knack for pattern recognition</li>
+        </ul>
+      </div>
+
+      <div class="weaknesses">
+        <h4>⚡ Areas I’m Improving</h4>
+        <ul>
+          <li>Not passionate about long manual coding or debugging</li>
+          <li>Tend to overfocus on design perfection sometimes</li>
+          <li>Learning to delegate more efficiently in team projects</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- rest: Projects + Skills + Certifications + Contact (unchanged) -->
+  <section id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card"><h3>🛒 SmartCart - AI Recommendation System</h3><p class="duration">Aug 2024 – Oct 2024</p><p>Built AI-driven supermarket recommendation system using clustering and analytics.</p><a href="https://github.com/Honeykcpu/smart-cart" target="_blank" class="project-link">GitHub</a></div>
+      <div class="project-card"><h3>🧠 Mental Health Sentiment Analysis</h3><p class="duration">Sept 2025 – Oct 2025</p><p>Analyzed public mental health sentiment via NLP and Power BI visualization.</p><a href="https://github.com/Honeykcpu/mental-health-sentiment" target="_blank" class="project-link">GitHub</a></div>
+      <div class="project-card"><h3>🏪 DMart Sales Dashboard</h3><p class="duration">Apr 2025 – May 2025</p><p>Created Power BI dashboard to analyze product and region sales trends.</p></div>
+      <div class="project-card"><h3>👥 Employee Performance Dashboard</h3><p class="duration">Jun 2025 – Jul 2025</p><p>Built HR-focused KPI dashboard highlighting efficiency and attendance trends.</p></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="skills-container">
+      <div class="skill-category"><h3>📊 Data Analytics & BI</h3><div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">Excel</span><span class="skill-tag">SQL</span><span class="skill-tag">Python</span><span class="skill-tag">DAX</span></div></div>
+      <div class="skill-category"><h3>🤖 AI & Automation</h3><div class="skill-tags"><span class="skill-tag">ChatGPT</span><span class="skill-tag">Copilot</span><span class="skill-tag">Gemini</span><span class="skill-tag">Claude</span></div></div>
+      <div class="skill-category"><h3>💼 Core Competencies</h3><div class="skill-tags"><span class="skill-tag">Business Analysis</span><span class="skill-tag">Project Planning</span><span class="skill-tag">Stakeholder Management</span></div></div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2 class="section-title">Certifications & Achievements</h2>
+    <div class="featured-certs">
+      <div class="featured-cert"><img src="images/jpmorgan.png"><h4>JPMorgan Chase & Co.</h4><p class="cert-title">Quantitative Research Job Simulation</p></div>
+      <div class="featured-cert"><img src="images/siemens.png"><h4>Siemens</h4><p class="cert-title">Project Manager Job Simulation</p></div>
+      <div class="featured-cert"><img src="images/dynamics.png"><h4>Microsoft</h4><p class="cert-title">Dynamics 365 Business Central</p></div>
+      <div class="featured-cert"><img src="images/fabric.png"><h4>Microsoft</h4><p class="cert-title">Microsoft Fabric</p></div>
+      <div class="featured-cert"><img src="images/powerbi.png"><h4>Microsoft</h4><p class="cert-title">Copilot in Power BI</p></div>
+      <div class="featured-cert"><img src="images/icat.png"><h4>ICAT</h4><p class="cert-title">Aptitude Test</p></div>
+      <div class="featured-cert"><img src="images/linkedin.png"><h4>LinkedIn</h4><p class="cert-title">Career Skills in Analytics</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Let's Connect</h2>
+    <div style="text-align:center;">
+      <p>Email: <a href="mailto:honeykundla567@gmail.com" style="color:#0071eb;">honeykundla567@gmail.com</a></p>
+      <p>Phone: <a href="tel:+918390685522" style="color:#0071eb;">+91 8390685522</a></p>
+      <p>Ambarnath, Maharashtra, India</p>
+    </div>
+  </section>
+
+  <footer><p>© 2025 Honey Kundla | Data & Business Intelligence Portfolio</p></footer>
+</body>
+</html>
